@@ -3,7 +3,7 @@
 Generate The Documentation
 --------------------------
 
-This project uses ``sphinx`` & ``doxygen`` in order to generate it's documentation & hosts them on `Github Pages <https://roeey777.github.io/modern-cmake/>`_.
+This project uses ``sphinx`` & ``doxygen`` in order to generate it's documentation & hosts them on `Github Pages <https://roeey777.github.io/python-entry-point-from-cpp/>`_.
 There are a few steps for generating & hosting documentation.
 
 Automatic generation of documentation
@@ -11,16 +11,14 @@ Automatic generation of documentation
 
 .. warning::
 
-   .. deprecated:: 58248f69ad8816a7dd4bb3b89089594196befebc
+   This method of publishing the documentation to `Github Pages <https://roeey777.github.io/python-entry-point-from-cpp/>`_ is out-of-date.
+   Please use ``publish-docs.sh`` script instead.
 
-      This method of publishing the documentation to `Github Pages <https://roeey777.github.io/modern-cmake/>`_ is out-of-date.
-      Please use ``publish-docs.sh`` script instead.
-
-   At first you should verify that you are using the ``modern-cmake`` environment.
+   At first you should verify that you are using the ``poc`` environment.
 
    .. code-block:: bash
 
-      conda activate modern-cmake
+      conda activate poc
 
    If not installed please refer to the installation page.
 

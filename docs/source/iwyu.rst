@@ -37,7 +37,7 @@ For example you can use it like this:
 .. code-block:: bash
 
    cmake -S . -B bld -Wdev -Werror=dev -DCMAKE_FIND_ROOT_PATH=$CONDA_PREFIX -DENABLE_IWYU=ON
-   cmake --build bld --target Fact
+   cmake --build bld --target Poc
 
 This will create & use a build directory called ``bld`` and ``cmake`` will invoke ``iwyu`` on each ``C++`` source file.
 

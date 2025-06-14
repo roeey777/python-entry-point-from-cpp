@@ -18,12 +18,12 @@
 
 CMAKE_BUILD_DIR="build/docs"
 DOCS_BUILD_DIR="docs/build"
-DEFAULT_BRANCH="solution/roeey"
+DEFAULT_BRANCH="master"
 GIT_REMOTE_NAME="${1:-github}"
 GITHUB_PAGES_BRANCH="gh-pages"
 COMMIT_ID="$(git rev-parse "${DEFAULT_BRANCH}")"
 COMMIT_MSG="Documentation for commit ${COMMIT_ID}"
-CONDA_ENVIRONMENT_NAME="modern-cmake"
+CONDA_ENVIRONMENT_NAME="poc"
 
 function copy_to_build_dir() {
     mkdir -p "${DOCS_BUILD_DIR}"

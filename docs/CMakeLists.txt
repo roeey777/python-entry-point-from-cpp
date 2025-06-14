@@ -2,8 +2,8 @@
 find_package(Doxygen REQUIRED)
 
 # Find all the public headers
-get_target_property(FACT_PUBLIC_HEADER_DIR Fact INTERFACE_INCLUDE_DIRECTORIES)
-file(GLOB_RECURSE FACT_PUBLIC_HEADERS ${FACT_PUBLIC_HEADER_DIR}/*.h)
+get_target_property(POC_PUBLIC_HEADER_DIR Poc INTERFACE_INCLUDE_DIRECTORIES)
+file(GLOB_RECURSE POC_PUBLIC_HEADERS ${POC_PUBLIC_HEADER_DIR}/*.h)
 
 set(DOXYGEN_INPUT_DIR ${PROJECT_SOURCE_DIR}/include)
 set(DOXYGEN_OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/docs/)
@@ -16,7 +16,7 @@ configure_file(${DOXYFILE_IN} ${DOXYFILE_OUT} @ONLY)
 
 file(MAKE_DIRECTORY ${DOXYGEN_OUTPUT_DIR}) # Doxygen won't create this for us
 add_custom_command(OUTPUT ${DOXYGEN_INDEX_FILE}
-                    DEPENDS ${FACT_PUBLIC_HEADER_DIR}
+                    DEPENDS ${POC_PUBLIC_HEADER_DIR}
                     COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYFILE_OUT}
                     MAIN_DEPENDENCY ${DOXYFILE_OUT} ${DOXYFILE_IN}
                     COMMENT "Generating docs with Doxygen")

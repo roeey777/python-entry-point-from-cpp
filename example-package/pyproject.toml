@@ -1,0 +1,18 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+
+requires = [ "setuptools" ]
+
+[project]
+name = "example"
+description = "example package with an entry point"
+version = "0.1.0"
+
+[project.entry-points."example.group"]
+hello = "example.example:hello"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = [ "src" ]

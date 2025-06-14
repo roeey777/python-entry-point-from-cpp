@@ -1,21 +1,22 @@
 #ifndef POC_HPP
 #define POC_HPP
 
-#include <string>
 #include <cstddef>
-#include <vector>
 #include <functional>
+#include <string>
 #include <unordered_map>
+#include <vector>
 
 namespace poc {
 
 /**
  * @brief Generic handler plugin definition.
- * @param bytes raw bytes of a "command" (which needs de-serialization in the plugin)
- *              which will be used/consumed by the plugin.
+ * @param bytes raw bytes of a "command" (which needs de-serialization in the
+ * plugin) which will be used/consumed by the plugin.
  * @return serialized bytes of the response.
  */
-using plugin_fn_t = std::function<std::vector<std::byte>(const std::vector<std::byte>& bytes)>;
+using plugin_fn_t =
+  std::function<std::vector<std::byte>(const std::vector<std::byte>& bytes)>;
 
 /**
  * A mapping between a string to it's corresponding plugin.
@@ -29,8 +30,9 @@ using plugins_mapping_t = std::unordered_map<std::string, plugin_fn_t>;
  *                   be "poc.plugins".
  * @return a plugins mapping.
  */
-plugins_mapping_t load_plugins(const std::string& group_name);
+plugins_mapping_t
+load_plugins(const std::string& group_name);
 
-};  /* namespace poc */
+}; /* namespace poc */
 
 #endif /* POC_HPP */

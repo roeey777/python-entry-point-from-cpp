@@ -1,4 +1,4 @@
-set(FACT_VERSION 1.0.0)
+set(POC_VERSION 1.0.0)
 
 find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
 find_package(pybind11 REQUIRED)
@@ -14,6 +14,16 @@ target_include_directories(
 
 target_link_libraries(Poc PRIVATE project_options project_warnings
                                     spdlog::spdlog pybind11::embed)
+
+add_executable(loader main.cpp)
+add_executable(Poc::loader ALIAS loader)
+target_include_directories(
+    loader PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+                $<INSTALL_INTERFACE:include>)
+
+target_link_libraries(loader PRIVATE project_options project_warnings
+                                    Poc::Poc pybind11::embed)
+
 
 # Install
 include(GNUInstallDirs)
@@ -58,7 +68,7 @@ install(
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file(
     ${VERSION_FILE}
-    VERSION ${FACT_VERSION}
+    VERSION ${POC_VERSION}
     COMPATIBILITY SameMajorVersion)
 
 # Create PocConfig.cmake file

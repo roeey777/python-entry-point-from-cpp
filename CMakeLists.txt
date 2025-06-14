@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.15)
 
-project(Fact LANGUAGES CXX)
+project(Poc LANGUAGES CXX)
 
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
-option(ENABLE_TESTING "Enable Test Builds" ON)
+option(ENABLE_TESTING "Enable Test Builds" OFF)
 option(ENABLE_DOCS "Enable Documentation Builds" ON)
 
 # Link this 'library' to set the c++ standard / compile-time options requested

@@ -27,10 +27,10 @@ Here is how to install ``clang-tidy`` using ``conda-forge``.
 
    .. note::
 
-      if you are using the ``conda`` environment ``modern-cmake`` managed from ``environment.yml`` then you are good to go since it's already being dealt with in that environment.
+      if you are using the ``conda`` environment ``poc`` managed from ``environment.yml`` then you are good to go since it's already being dealt with in that environment.
 
 
-In addition ``clang-tidy`` is already a part of the ``modern-cmake`` ``conda`` environment (listed in ``environment.yml``).
+In addition ``clang-tidy`` is already a part of the ``poc`` ``conda`` environment (listed in ``environment.yml``).
 
 In this project we invoke ``clang-tidy`` from within ``cmake`` itself, it can be done by setting the ``ENABLE_CLANG_TIDY`` option to ``ON`` (default is ``OFF``).
 For example you can use it like this:
@@ -38,7 +38,7 @@ For example you can use it like this:
 .. code-block:: bash
 
    cmake -S . -B bld -Wdev -Werror=dev -DCMAKE_FIND_ROOT_PATH=$CONDA_PREFIX -DENABLE_CLANG_TIDY=ON
-   cmake --build bld --target Fact
+   cmake --build bld --target Poc
 
 This will create & use a build directory called ``bld`` and ``cmake`` will invoke ``clang-tidy`` on each ``C++`` source file.
 

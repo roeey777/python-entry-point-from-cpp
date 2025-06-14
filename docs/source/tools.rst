@@ -15,6 +15,7 @@ There are multiple tools used by this project, let's try to list them all (and p
 #. :ref:`include-what-you-use <iwyu>` - A tool for use with clang to analyze #includes in C and C++ source files.
 #. :ref:`shfmt <shfmt>` - bash scripts formatter.
 #. :ref:`shellcheck <shellcheck>` - static analyzer for bash scripts.
+#. :ref:`clang-format <clang-format>` - a ``clang``-based code formatter.
 #. ``PlantUML`` - Tool for generating images from UML text.
 #. ``Graphviz`` - Tool for generating images from graphviz text.
 
@@ -27,4 +28,5 @@ There are multiple tools used by this project, let's try to list them all (and p
    cppcheck
    clang-tidy
    iwyu
+   clang-format
 

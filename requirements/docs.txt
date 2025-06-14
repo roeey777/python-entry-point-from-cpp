@@ -5,3 +5,5 @@ sphinx-copybutton>=0.5.2,<1
 sphinx-rtd-dark-mode>=1.3.0,<2
 sphinxcontrib-plantuml>=0.30,<1
 sphinxcontrib-mermaid>=1.0.0,<2
+sphinx-diagrams>=0.4.0,<1
+sphinxcontrib-shellcheck>=1.1.2,<2
