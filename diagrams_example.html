@@ -1,0 +1,197 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diagrams Example &mdash; Proof-of-Concept - Python Entry-Points from C++  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+    <link rel="canonical" href="https://roeey777.github.io/python-entry-point-from-cpp/diagrams_example.html" />
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
+      <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tools" href="tools.html" />
+    <link rel="prev" title="Graphviz Example" href="graphviz_example.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Proof-of-Concept - Python Entry-Points from C++
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="doxygen_index.html">Doxygen Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generate_docs.html">Generate The Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plantuml_example.html">PlantUML Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mermaid_example.html">Mermaid Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphviz_example.html">Graphviz Example</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Diagrams Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Proof-of-Concept - Python Entry-Points from C++</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Diagrams Example</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/diagrams_example.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="diagrams-example">
+<span id="id1"></span><h1>Diagrams Example<a class="headerlink" href="#diagrams-example" title="Link to this heading"></a></h1>
+<p>There is a plugin for <code class="docutils literal notranslate"><span class="pre">sphinx</span></code> called <code class="docutils literal notranslate"><span class="pre">sphinx-diagram</span></code> which adds support for embedding <code class="docutils literal notranslate"><span class="pre">Diagram</span></code> graphs
+in your documents. <code class="docutils literal notranslate"><span class="pre">Diagrams</span></code> moto is “diagrams as code” since the diagrams are generated from code using <code class="docutils literal notranslate"><span class="pre">graphviz</span></code>.
+There diagrams let you visualize system architecture , here is a quote from the <a class="reference external" href="https://github.com/mingrammer/diagrams#diagrams">Diagrams README</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Diagrams</span> <span class="n">lets</span> <span class="n">you</span> <span class="n">draw</span> <span class="n">the</span> <span class="n">cloud</span> <span class="n">system</span> <span class="n">architecture</span> <span class="ow">in</span> <span class="n">Python</span> <span class="n">code</span><span class="o">.</span>
+<span class="n">It</span> <span class="n">was</span> <span class="n">born</span> <span class="k">for</span> <span class="n">prototyping</span> <span class="n">a</span> <span class="n">new</span> <span class="n">system</span> <span class="n">architecture</span> <span class="n">design</span> <span class="n">without</span> <span class="nb">any</span> <span class="n">design</span> <span class="n">tools</span><span class="o">.</span>
+<span class="n">You</span> <span class="n">can</span> <span class="n">also</span> <span class="n">describe</span> <span class="ow">or</span> <span class="n">visualize</span> <span class="n">the</span> <span class="n">existing</span> <span class="n">system</span> <span class="n">architecture</span> <span class="k">as</span> <span class="n">well</span><span class="o">.</span>
+<span class="n">Diagrams</span> <span class="n">currently</span> <span class="n">supports</span> <span class="n">main</span> <span class="n">major</span> <span class="n">providers</span> <span class="n">including</span><span class="p">:</span> <span class="n">AWS</span><span class="p">,</span> <span class="n">Azure</span><span class="p">,</span> <span class="n">GCP</span><span class="p">,</span> <span class="n">Kubernetes</span><span class="p">,</span> <span class="n">Alibaba</span> <span class="n">Cloud</span><span class="p">,</span> <span class="n">Oracle</span> <span class="n">Cloud</span> <span class="n">etc</span><span class="o">...</span>
+<span class="n">It</span> <span class="n">also</span> <span class="n">supports</span> <span class="n">On</span><span class="o">-</span><span class="n">Premises</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">SaaS</span> <span class="ow">and</span> <span class="n">major</span> <span class="n">Programming</span> <span class="n">frameworks</span> <span class="ow">and</span> <span class="n">languages</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>One can achieve this by following these instructions:</p>
+<ol class="arabic">
+<li><p>Make sure <code class="docutils literal notranslate"><span class="pre">graphviz</span></code> is properly installed on your machine/environment, for instance it can be installed via <code class="docutils literal notranslate"><span class="pre">conda</span></code> like this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>graphviz
+</pre></div>
+</div>
+</li>
+<li><p>Make sure you have the <code class="docutils literal notranslate"><span class="pre">sphinx</span></code> plugin for <code class="docutils literal notranslate"><span class="pre">diagram</span></code> (installable via <code class="docutils literal notranslate"><span class="pre">pip</span></code>)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>sphinx-diagram
+</pre></div>
+</div>
+</li>
+<li><p>Make sure that this plugin would be recognized in your <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> by adding it to the <code class="docutils literal notranslate"><span class="pre">extentions</span></code> list</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this project the <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> is generated by <code class="docutils literal notranslate"><span class="pre">cmake</span></code> from the <code class="docutils literal notranslate"><span class="pre">conf.py.in</span></code> file and therefore
+this addition should be added to <code class="docutils literal notranslate"><span class="pre">conf.py.in</span></code> since it’s the template file for the generated <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">extentions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="o">...</span>
+    <span class="s2">&quot;sphinx_diagrams&quot;</span><span class="p">,</span>
+    <span class="o">...</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>After those instructions you should be able to add the following directives in your <code class="docutils literal notranslate"><span class="pre">.rst</span></code> files</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">diagrams</span><span class="p">::</span>
+
+   import sys
+   from diagrams import Cluster, Diagram
+   from diagrams.aws.compute import ECS, EKS, Lambda
+   from diagrams.aws.database import Redshift
+   from diagrams.aws.integration import SQS
+   from diagrams.aws.storage import S3
+
+   with Diagram(&quot;Event Processing&quot;, filename=sys.argv[1], show=sys.argv[2].lower() == &quot;true&quot;):
+       source = EKS(&quot;k8s source&quot;)
+
+       with Cluster(&quot;Event Flows&quot;):
+           with Cluster(&quot;Event Workers&quot;):
+               workers = [ECS(&quot;worker1&quot;),
+                          ECS(&quot;worker2&quot;),
+                          ECS(&quot;worker3&quot;)]
+
+           queue = SQS(&quot;event queue&quot;)
+
+           with Cluster(&quot;Processing&quot;):
+               handlers = [Lambda(&quot;proc1&quot;),
+                           Lambda(&quot;proc2&quot;),
+                           Lambda(&quot;proc3&quot;)]
+
+       store = S3(&quot;events store&quot;)
+       dw = Redshift(&quot;analytics&quot;)
+
+       source &gt;&gt; workers &gt;&gt; queue &gt;&gt; handlers
+       handlers &gt;&gt; store
+       handlers &gt;&gt; dw
+</pre></div>
+</div>
+<p>Here is how it looks:</p>
+<div class="graphviz"><a href="_images/diagrams_examplea8770873702d71db24ca3c27c52c7c2fa7feaa5b.png"><img src="_images/diagrams_examplea8770873702d71db24ca3c27c52c7c2fa7feaa5b.png" class="diagrams" /></a></div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="graphviz_example.html" class="btn btn-neutral float-left" title="Graphviz Example" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tools.html" class="btn btn-neutral float-right" title="Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Eyal Royee.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

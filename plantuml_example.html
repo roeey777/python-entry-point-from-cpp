@@ -1,0 +1,370 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlantUML Example &mdash; Proof-of-Concept - Python Entry-Points from C++  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+    <link rel="canonical" href="https://roeey777.github.io/python-entry-point-from-cpp/plantuml_example.html" />
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
+      <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Mermaid Example" href="mermaid_example.html" />
+    <link rel="prev" title="Generate The Documentation" href="generate_docs.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Proof-of-Concept - Python Entry-Points from C++
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="doxygen_index.html">Doxygen Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generate_docs.html">Generate The Documentation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">PlantUML Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mermaid_example.html">Mermaid Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphviz_example.html">Graphviz Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diagrams_example.html">Diagrams Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Proof-of-Concept - Python Entry-Points from C++</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">PlantUML Example</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/plantuml_example.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="plantuml-example">
+<span id="id1"></span><h1>PlantUML Example<a class="headerlink" href="#plantuml-example" title="Link to this heading"></a></h1>
+<p>There is a plugin for <code class="docutils literal notranslate"><span class="pre">sphinx</span></code> called <code class="docutils literal notranslate"><span class="pre">sphinxcontrib-plantuml</span></code> which adds support for embedding <code class="docutils literal notranslate"><span class="pre">plantuml</span></code>
+into <code class="docutils literal notranslate"><span class="pre">.rst</span></code> files so the generated HTML files will show beautiful UML diagrams.
+One can achieve this by following these instructions:</p>
+<ol class="arabic">
+<li><p>Make sure <code class="docutils literal notranslate"><span class="pre">plantuml</span></code> is properly installed on your machine/environment, for instance it can be installed via <code class="docutils literal notranslate"><span class="pre">conda</span></code> like this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>plantuml
+</pre></div>
+</div>
+</li>
+<li><p>Make sure you have the <code class="docutils literal notranslate"><span class="pre">sphinx</span></code> plugin for <code class="docutils literal notranslate"><span class="pre">plantuml</span></code> (installable via <code class="docutils literal notranslate"><span class="pre">pip</span></code>)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>sphinxcontrib-plantuml
+</pre></div>
+</div>
+</li>
+<li><p>Make sure that this plugin would be recognized in your <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> by adding it to the <code class="docutils literal notranslate"><span class="pre">extentions</span></code> list</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this project the <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> is generated by <code class="docutils literal notranslate"><span class="pre">cmake</span></code> from the <code class="docutils literal notranslate"><span class="pre">conf.py.in</span></code> file and therefore
+this addition should be added to <code class="docutils literal notranslate"><span class="pre">conf.py.in</span></code> since it’s the template file for the generated <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">extentions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="o">...</span>
+    <span class="s2">&quot;sphinxcontrib.plantuml&quot;</span><span class="p">,</span>
+    <span class="o">...</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>After those instructions you should be able to add the following directives in your <code class="docutils literal notranslate"><span class="pre">.rst</span></code> files</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">uml</span><span class="p">::</span>
+
+   @startuml
+   skinparam monochrome true
+   Alpha -&gt; Bravo
+   Bravo -&gt; Alpha
+   @enduml
+</pre></div>
+</div>
+<p>Or if you prefer:</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">plantuml</span><span class="p">::</span>
+
+   @startuml
+   skinparam monochrome true
+   Alpha -&gt; Bravo
+   Bravo -&gt; Alpha
+   @enduml
+</pre></div>
+</div>
+<p>Here is how it looks (this is a very small sequence diagram)</p>
+<p class="plantuml">
+<img src="_images/plantuml-4b4314d15022f3079bc9cf2bde790522f451fc87.svg" alt="&#64;startuml
+skinparam monochrome true
+Alpha -&gt; Bravo
+Bravo -&gt; Alpha
+&#64;enduml"/></p>
+<p>Here is a far more complex class diagram :</p>
+<p class="plantuml">
+<img src="_images/plantuml-1536b4496d1a8680530b3fb58c775a0a85adfbb2.svg" alt="&#64;startuml
+
+package &quot;ascii_art&quot; {
+  class KeyboardInput {
+    - scanner : Scanner
+    + getObject() : KeyboardInput
+    + readLine() : String
+    }
+  interface Model {
+    + add(args : String) : void
+    + remove(args : String) : void
+    + setCharacterSet(chars : char[]) : void
+    + getCharacterSet() : char[]
+    + setResolution(args : String) : int
+    + setImageFile(args : String) : void
+    + setOutput(args : String) : AsciiOutput
+    + execute() : char[][]
+  }
+
+  interface Consumer {
+    + apply(args : String) : void
+  }
+
+  class AsciiArtModel implements Model {
+    - subImgCharMatcher : SubImgCharMatcher
+    - resolution : int
+    - image : Image
+    - factory : AsciiOutputFactory
+    + AsciiArtModel(charset : char[])
+    + AsciiArtModel()
+    + add(args : String) : void
+    + remove(args : String) : void
+    + setCharacterSet(chars : char[]) : void
+    + getCharacterSet() : char[]
+    + setResolution(args : String) : int
+    + setImageFile(args : String) : void
+    + setOutput(args : String) : AsciiOutput
+    + execute() : char[][]
+    - loadImage(path : String) : Image
+    - parseArgs(args : String) : char[]
+    - parseRange(argument : String) : char[]
+    + isValidRangeChar(argument : String) : boolean
+    + isValidRangeChar(c : char) : boolean
+    - parseArgsAsPath(args : String) : String
+    - parseOutput(args : String) : String
+  }
+
+  class AsciiArtAlgorithm {
+    - image : Image
+    - resolution : int
+    - subImgCharMatcher : SubImgCharMatcher
+    + AsciiArtAlgorithm(image : Image, resolution : int, subImgCharMatcher : SubImgCharMatcher)
+    + run() : char[][]
+  }
+
+  class Shell {
+    - model : Model
+    - view : AsciiOutput
+    - running : boolean
+    - operations : HashMap&lt;String, Consumer&gt;
+    + Shell(model : Model)
+    + run() : void
+    + main(args : String[]) : void
+    - set_operations() : void
+    - exit(args : String) : void
+    - asciiArt(args : String) : void
+    - output(args : String) : void
+    - image(args : String) : void
+    - res(args : String) : void
+    - remove(args : String) : void
+    - add(args : String) : void
+    - chars(args : String) : void
+    + parseCommand(line : String) : String[]
+      }
+}
+/'end of package ascii_art'/
+
+package &quot;image_char_matching&quot; {
+class SubImgCharMatcher {
+  - charset : ArrayList&lt;Character&gt;
+  - dictBrightness : HashMap&lt;Character, Double&gt;
+  - allBrightness : HashMap&lt;Character, Double&gt;
+  - cache : HashMap&lt;Double, Character&gt;
+  - minBrightHeap : PriorityQueue&lt;Double&gt;
+  - maxBrightHeap : PriorityQueue&lt;Double&gt;
+  - normalizedBrightness : HashMap&lt;Character, Double&gt;
+  + SubImgCharMatcher(charset : char[])
+  + getCharByImageBrightness(brightness : double) : char
+  + addChar(c : char) : void
+  + removeChar(c : char) : void
+  + getCharSet() : char[]
+  - histogramEqualization() : void
+  - addCharUnSafe(c : char) : void
+  - removeUnSafeChar(c : char) : void
+  - getDistance(brightness : double, c : char) : double
+  - calculateBrightness(boolArrayChar : boolean[][]) : double
+  - calculateBrightness(c : char) : double
+  }
+
+  class CharConverter {
+  {static} + convertToBoolArray(c : char) : boolean[][]
+  }
+} /'end of package image_char_matching'/
+
+package &quot;image&quot; {
+  class ImageManipulator {
+  {static} + padImage(image : Image) : Image
+  {static} + splitImage(image : Image, resolution : int) : Image[][]
+  {static} + isValidResolution(image : Image, resolution : int) : boolean
+  {static} + getImageBrightness(image : Image) : double
+  - RGB2Gray(image : Image) : double[][]
+  - RGB2Gray(color : Color) : double
+  - nearestPowerOfTwo(number : int) : int
+  - log2(number : int) : double
+  - extractSubImage(image : Image, topLeftCornerRow : int, topLeftCornerColumn : int, squareEdge : int) : Image
+    }
+
+  class Image {
+  - pixelArray : Color[][]
+    - width : int
+    - height : int
+    + Image(filename : String)
+    + Image(pixelArray : Color[][], width : int, height : int)
+    + getWidth() : int
+    + getHeight() : int
+    + getPixel(x : int, y : int) : Color
+    + saveImage(fileName : String) : void
+      }
+    } /'end of package image'/
+
+package &quot;exceptions&quot; {
+  exception ModelException {
+  + ModelException(errorMessage : String)
+    }
+} /'end of package exceptions'/
+
+package &quot;ascii_output&quot; {
+  interface AsciiOutput {
+  + out(chars : char[][]) : void
+    }
+  class HtmlAsciiOutput implements AsciiOutput {
+  - fontName : String
+    - filename : String
+
+      + HtmlAsciiOutput(filename : String, fontName : String)
+      + out(chars : char[][]) : void
+        }
+
+  class ConsoleAsciiOutput implements AsciiOutput {
+  + out(chars : char[][]) : void
+    }
+
+  } /'end of package ascii_output'/
+
+package &quot;factories&quot;{
+    class AsciiOutputFactory {
+      - fontName : String
+      - filename : String
+      + AsciiOutputFactory()
+      + AsciiOutputFactory(filename : String, fontName : String)
+      + build(name : String) : AsciiOutput
+      }
+  }
+
+/'associations'/
+AsciiArtModel *-- SubImgCharMatcher
+AsciiArtAlgorithm *-- SubImgCharMatcher
+AsciiArtAlgorithm *-- Image
+AsciiArtModel *-- Image
+Shell *-- AsciiOutput
+AsciiArtModel *-- AsciiOutputFactory
+Shell *-- Model
+Shell o-- Consumer  /' aggragates Consumers (command handlers) '/
+
+/'relations'/
+Model &quot;throws&quot; ..&gt; ModelException
+ImageManipulator .. Image : uses
+SubImgCharMatcher .. CharConverter : uses
+Shell .. KeyboardInput : uses
+AsciiArtModel .. ImageManipulator : uses
+AsciiArtAlgorithm .. ImageManipulator : uses
+
+/' factory relations '/
+AsciiOutputFactory &lt;|-- ConsoleAsciiOutput
+AsciiOutputFactory &lt;|-- HtmlAsciiOutput
+AsciiOutputFactory --&gt; AsciiOutput
+
+&#64;enduml"/></p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="generate_docs.html" class="btn btn-neutral float-left" title="Generate The Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mermaid_example.html" class="btn btn-neutral float-right" title="Mermaid Example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Eyal Royee.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
