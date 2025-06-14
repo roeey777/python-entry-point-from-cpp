@@ -19,7 +19,7 @@
 CMAKE_BUILD_DIR="build/docs"
 DOCS_BUILD_DIR="docs/build"
 DEFAULT_BRANCH="master"
-GIT_REMOTE_NAME="${1:-github}"
+GIT_REMOTE_NAME="${1:-origin}"
 GITHUB_PAGES_BRANCH="gh-pages"
 COMMIT_ID="$(git rev-parse "${DEFAULT_BRANCH}")"
 COMMIT_MSG="Documentation for commit ${COMMIT_ID}"
