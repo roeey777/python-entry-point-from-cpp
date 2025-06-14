@@ -1,0 +1,13 @@
+PROJECT_NAME           = @PROJECT_NAME@
+PROJECT_NUMBER         = @PROJECT_VERSION@
+
+RECURSIVE = YES
+GENERATE_XML = YES
+GENERATE_LATEX = NO
+EXTRACT_ALL = YES
+OUTPUT_DIRECTORY       = @CMAKE_CURRENT_BINARY_DIR@/docs/
+INPUT                  = @CMAKE_CURRENT_SOURCE_DIR@/../include/
+
+# don't use absolute paths, use relative to top-directory instead
+FULL_PATH_NAMES = YES
+STRIP_FROM_PATH = @PROJECT_SOURCE_DIR@
