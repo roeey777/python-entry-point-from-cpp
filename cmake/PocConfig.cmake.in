@@ -5,6 +5,8 @@ include(CMakeFindDependencyMacro)
 
 get_filename_component(POC_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
 list(APPEND CMAKE_MODULE_PATH ${POC_CMAKE_DIR})
+find_dependency(Python3 COMPONENTS Interpreter Development REQUIRED)
+find_dependency(pybind11 REQUIRED)
 find_dependency(spdlog REQUIRED)
 list(REMOVE_AT CMAKE_MODULE_PATH -1)
 

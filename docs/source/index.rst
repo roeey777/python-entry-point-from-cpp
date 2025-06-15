@@ -18,6 +18,7 @@ documentation for details.
    :caption: Contents:
 
    doxygen_index
+   installation
    generate_docs
    plantuml_example
    mermaid_example
