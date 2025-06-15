@@ -13,17 +13,7 @@ target_include_directories(
                 $<INSTALL_INTERFACE:include>)
 
 target_link_libraries(Poc PRIVATE project_options project_warnings
-                                    spdlog::spdlog pybind11::embed)
-
-add_executable(loader main.cpp)
-add_executable(Poc::loader ALIAS loader)
-target_include_directories(
-    loader PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
-                $<INSTALL_INTERFACE:include>)
-
-target_link_libraries(loader PRIVATE project_options project_warnings
-                                    Poc::Poc pybind11::embed)
-
+                          PUBLIC spdlog::spdlog pybind11::embed)
 
 # Install
 include(GNUInstallDirs)
