@@ -69,3 +69,11 @@ configure_package_config_file(${PROJECT_CONFIG_IN} ${PROJECT_CONFIG_OUT}
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/PocConfig.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/PocConfigVersion.cmake
         DESTINATION ${INSTALL_CONFIG_DIR})
+
+# Install typing stub into site-packages for future plugins type annotation.
+install(FILES
+            ${CMAKE_CURRENT_SOURCE_DIR}/poc/typing.py
+            ${CMAKE_CURRENT_SOURCE_DIR}/poc/__init__.py
+	    ${CMAKE_CURRENT_SOURCE_DIR}/poc/py.typed
+        DESTINATION ${Python3_SITELIB}/poc/)
+

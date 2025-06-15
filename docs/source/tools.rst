@@ -18,6 +18,7 @@ There are multiple tools used by this project, let's try to list them all (and p
 #. :ref:`clang-format <clang-format>` - a ``clang``-based code formatter.
 #. ``PlantUML`` - Tool for generating images from UML text.
 #. ``Graphviz`` - Tool for generating images from graphviz text.
+#. :ref:`mypy <mypy>` - a static type checker for ``python`` code.
 
 .. toctree::
    :maxdepth: 2
@@ -29,4 +30,5 @@ There are multiple tools used by this project, let's try to list them all (and p
    clang-tidy
    iwyu
    clang-format
+   mypy
 
