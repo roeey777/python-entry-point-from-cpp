@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 
+#include <Python.h>         // Required for PyErr_Clear
 #include <pybind11/embed.h> // everything needed for embedding
 
 #include <poc/poc.hpp>
@@ -29,7 +30,15 @@ main(int argc, char** argv)
   poc::plugins_mapping_t mapping = poc::load_plugins("example.group");
 
   poc::plugin_fn_t plugin = mapping.at("hello");
-  (void)plugin(input_to_plugin);
+
+  try {
+    (void)plugin(input_to_plugin);
+  } catch (py::error_already_set& e) {
+    /* catch all python's exceptions */
+    std::cout << "Caught an exception from python, which is: " << e.what()
+              << std::endl;
+    PyErr_Clear();
+  }
 
   return 0;
 }
