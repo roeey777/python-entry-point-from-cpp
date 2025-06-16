@@ -19,6 +19,7 @@ documentation for details.
 
    doxygen_index
    installation
+   entry_point
    generate_docs
    plantuml_example
    mermaid_example
