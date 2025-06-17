@@ -17,13 +17,11 @@ documentation for details.
    :maxdepth: 2
    :caption: Contents:
 
-   doxygen_index
    installation
    entry_point
+   proof_of_concept
+   demo
    generate_docs
-   plantuml_example
-   mermaid_example
-   graphviz_example
-   diagrams_example
+   doxygen_index
    tools
 
