@@ -104,32 +104,30 @@
 </ol>
 <p>Using the <code class="docutils literal notranslate"><span class="pre">poc</span></code> <code class="docutils literal notranslate"><span class="pre">conda</span></code> environment, all commands should be executed from the repo’s top directory.
 The test requires the following commands to be executed are:</p>
-<ol class="arabic simple">
-<li><p>Install the example package:</p></li>
-</ol>
+<ol class="arabic">
+<li><p>Install the example package:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>example-package<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>.<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>-
 </pre></div>
 </div>
-<ol class="arabic simple">
-<li><p>Build &amp; install the library</p></li>
-</ol>
+</li>
+<li><p>Build &amp; install the library</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>-B<span class="w"> </span>build/upstream<span class="w">  </span>-Wdev<span class="w"> </span>-Werror<span class="o">=</span>dev<span class="w"> </span>-DCMAKE_INSTALL_PREFIX<span class="o">=</span><span class="nv">$CONDA_PREFIX</span><span class="w"> </span>-DCMAKE_FIND_ROOT_PATH<span class="o">=</span><span class="nv">$CONDA_PREFIX</span><span class="w"> </span>-DENABLE_TESTING<span class="o">=</span>OFF
 cmake<span class="w"> </span>--build<span class="w"> </span>build/upstream<span class="w"> </span>--target<span class="w"> </span>install
 </pre></div>
 </div>
-<ol class="arabic simple">
-<li><p>Build the demo (loader) executable</p></li>
-</ol>
+</li>
+<li><p>Build the demo (loader) executable</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-S<span class="w"> </span>test/downstream<span class="w"> </span>-B<span class="w"> </span>build/downstream<span class="w">  </span>-Wdev<span class="w"> </span>-Werror<span class="o">=</span>dev<span class="w"> </span>-DCMAKE_FIND_ROOT_PATH<span class="o">=</span><span class="nv">$CONDA_PREFIX</span>
 cmake<span class="w"> </span>--build<span class="w"> </span>build/downstream
 </pre></div>
 </div>
-<ol class="arabic simple">
-<li><p>Execute the demo (loader) executable</p></li>
-</ol>
+</li>
+<li><p>Execute the demo (loader) executable</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./build/downstream/downstream
 </pre></div>
 </div>
+</li>
+</ol>
 <p>When the demo executable is running it will dynamically load entry-point group called <code class="docutils literal notranslate"><span class="pre">&quot;example.group&quot;</span></code>.
 In that group the demo will find 2 entry-points, one called <code class="docutils literal notranslate"><span class="pre">hello</span></code> and the other called <code class="docutils literal notranslate"><span class="pre">42</span></code>.
 Then the demo will <em>ignore</em> the <code class="docutils literal notranslate"><span class="pre">hello</span></code> entry-point since it’s name isn’t a valid name (not an unsigned number) and load the other entry-point (which has a valid name).</p>
