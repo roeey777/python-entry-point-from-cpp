@@ -24,29 +24,29 @@ The test requires the following commands to be executed are:
 
 #. Install the example package:
 
-.. code-block:: bash
+   .. code-block:: bash
 
-   cd example-package && pip install . && cd -
+      cd example-package && pip install . && cd -
 
 #. Build & install the library
 
-.. code-block:: bash
+   .. code-block:: bash
 
-   cmake -S . -B build/upstream  -Wdev -Werror=dev -DCMAKE_INSTALL_PREFIX=$CONDA_PREFIX -DCMAKE_FIND_ROOT_PATH=$CONDA_PREFIX -DENABLE_TESTING=OFF
-   cmake --build build/upstream --target install
+      cmake -S . -B build/upstream  -Wdev -Werror=dev -DCMAKE_INSTALL_PREFIX=$CONDA_PREFIX -DCMAKE_FIND_ROOT_PATH=$CONDA_PREFIX -DENABLE_TESTING=OFF
+      cmake --build build/upstream --target install
 
 #. Build the demo (loader) executable
 
-.. code-block:: bash
+   .. code-block:: bash
 
-   cmake -S test/downstream -B build/downstream  -Wdev -Werror=dev -DCMAKE_FIND_ROOT_PATH=$CONDA_PREFIX
-   cmake --build build/downstream
+      cmake -S test/downstream -B build/downstream  -Wdev -Werror=dev -DCMAKE_FIND_ROOT_PATH=$CONDA_PREFIX
+      cmake --build build/downstream
 
 #. Execute the demo (loader) executable
 
-.. code-block:: bash
+   .. code-block:: bash
 
-   ./build/downstream/downstream
+      ./build/downstream/downstream
 
 When the demo executable is running it will dynamically load entry-point group called ``"example.group"``.
 In that group the demo will find 2 entry-points, one called ``hello`` and the other called ``42``.
