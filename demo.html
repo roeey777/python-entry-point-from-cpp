@@ -1,0 +1,183 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo (a.k.a Downstream Test) &mdash; Proof-of-Concept - Python Entry-Points from C++  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+    <link rel="canonical" href="https://roeey777.github.io/python-entry-point-from-cpp/demo.html" />
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
+      <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Generate The Documentation" href="generate_docs.html" />
+    <link rel="prev" title="Proof of Concept" href="proof_of_concept.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Proof-of-Concept - Python Entry-Points from C++
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entry_point.html">Entry Points in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proof_of_concept.html">Proof of Concept</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Demo (a.k.a Downstream Test)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generate_docs.html">Generate The Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doxygen_index.html">Doxygen Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Proof-of-Concept - Python Entry-Points from C++</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Demo (a.k.a Downstream Test)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/demo.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="demo-a-k-a-downstream-test">
+<span id="downstream-test"></span><span id="demo"></span><h1>Demo (a.k.a Downstream Test)<a class="headerlink" href="#demo-a-k-a-downstream-test" title="Link to this heading"></a></h1>
+<p>This demo is sort of “integration” test since it verifies a combined set of elements, and they are:</p>
+<ol class="arabic simple">
+<li><p>The ability of “downstream” installation of this library.</p></li>
+<li><p>The ability to find &amp; load entry-points.</p></li>
+<li><p>The ability to invoke loaded entry-points.</p></li>
+</ol>
+<p>The steps of the test are as follows:</p>
+<ol class="arabic simple">
+<li><p>Install the example package, which registers an entry-point to a group called “example.group”</p></li>
+<li><p>Build the library.</p></li>
+<li><p>Build the loader executable (linked against the library).</p></li>
+<li><p>Execute the loader.</p></li>
+<li><p>Expect to see the output of the pythonic entry-point.</p></li>
+</ol>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">poc</span></code> <code class="docutils literal notranslate"><span class="pre">conda</span></code> environment, all commands should be executed from the repo’s top directory.
+The test requires the following commands to be executed are:</p>
+<ol class="arabic simple">
+<li><p>Install the example package:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>example-package<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>.<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>-
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Build &amp; install the library</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>-B<span class="w"> </span>build/upstream<span class="w">  </span>-Wdev<span class="w"> </span>-Werror<span class="o">=</span>dev<span class="w"> </span>-DCMAKE_INSTALL_PREFIX<span class="o">=</span><span class="nv">$CONDA_PREFIX</span><span class="w"> </span>-DCMAKE_FIND_ROOT_PATH<span class="o">=</span><span class="nv">$CONDA_PREFIX</span><span class="w"> </span>-DENABLE_TESTING<span class="o">=</span>OFF
+cmake<span class="w"> </span>--build<span class="w"> </span>build/upstream<span class="w"> </span>--target<span class="w"> </span>install
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Build the demo (loader) executable</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-S<span class="w"> </span>test/downstream<span class="w"> </span>-B<span class="w"> </span>build/downstream<span class="w">  </span>-Wdev<span class="w"> </span>-Werror<span class="o">=</span>dev<span class="w"> </span>-DCMAKE_FIND_ROOT_PATH<span class="o">=</span><span class="nv">$CONDA_PREFIX</span>
+cmake<span class="w"> </span>--build<span class="w"> </span>build/downstream
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Execute the demo (loader) executable</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./build/downstream/downstream
+</pre></div>
+</div>
+<p>When the demo executable is running it will dynamically load entry-point group called <code class="docutils literal notranslate"><span class="pre">&quot;example.group&quot;</span></code>.
+In that group the demo will find 2 entry-points, one called <code class="docutils literal notranslate"><span class="pre">hello</span></code> and the other called <code class="docutils literal notranslate"><span class="pre">42</span></code>.
+Then the demo will <em>ignore</em> the <code class="docutils literal notranslate"><span class="pre">hello</span></code> entry-point since it’s name isn’t a valid name (not an unsigned number) and load the other entry-point (which has a valid name).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Both entry-points names are valid fron the viewpoint of <code class="docutils literal notranslate"><span class="pre">python</span></code>, however in this library there is some “filterring” of entry-points based on thier names.
+A very crud filterring technique indeed, but it’s still proves the point - the library is <em>able</em> to filter entry-points by name.</p>
+</div>
+<p>Afterwards the demo will invoke the loaded entry-point (which points to a function called <code class="docutils literal notranslate"><span class="pre">hello</span></code> in the <code class="docutils literal notranslate"><span class="pre">example</span></code> package) with <code class="docutils literal notranslate"><span class="pre">b&quot;asdf&quot;</span></code> as the input.
+The expected output of the demo is the same as the expected output of calling <code class="docutils literal notranslate"><span class="pre">hello(b&quot;asdf&quot;)</span></code> from the <code class="docutils literal notranslate"><span class="pre">python</span></code> interpreter (with some addional logging messages).
+Here is how it suppose to look:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[2025-06-17 19:24:59.812] [info] loading plugins for group example.group
+[2025-06-17 19:24:59.841] [warning] Ignoring entry-point named &quot;hello&quot; since it&#39;s not an unsigned number!
+Got 4 bytes!
+They are: b&#39;asdf&#39;
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="proof_of_concept.html" class="btn btn-neutral float-left" title="Proof of Concept" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="generate_docs.html" class="btn btn-neutral float-right" title="Generate The Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Eyal Royee.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
