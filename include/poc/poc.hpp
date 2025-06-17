@@ -21,7 +21,7 @@ using plugin_fn_t =
 /**
  * A mapping between a string to it's corresponding plugin.
  */
-using plugins_mapping_t = std::unordered_map<std::string, plugin_fn_t>;
+using plugins_mapping_t = std::unordered_map<std::size_t, plugin_fn_t>;
 
 /**
  * @brief Load mapping of pythonic entry-points, of the given group name, into

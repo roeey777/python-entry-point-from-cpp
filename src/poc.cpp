@@ -1,3 +1,6 @@
+#include <optional>
+#include <sstream>
+
 #include <poc/poc.hpp>
 
 extern "C"
@@ -11,6 +14,26 @@ extern "C"
 namespace poc {
 
 namespace py = pybind11;
+
+/**
+ * @brief Try to convert a given string into unsigned number (std::size_t).
+ * @param s a string which will be converted to an unsigned number, if possible.
+ * @return the convertion result (the number) or std::nullopt which indicates
+ *         failure.
+ */
+static std::optional<std::size_t>
+convert_to_number(const std::string& s)
+{
+  std::size_t n;
+  std::stringstream ss(s);
+
+  ss >> n;
+  if (ss.eof() && !ss.fail()) {
+    return n;
+  } else {
+    return std::nullopt;
+  }
+}
 
 plugins_mapping_t
 load_plugins(const std::string& group_name)
@@ -38,6 +61,15 @@ load_plugins(const std::string& group_name)
     } else {
       for (const auto& entry_point : group_entries) {
         std::string name = entry_point.attr("name").cast<std::string>();
+        std::optional<std::size_t> number = convert_to_number(name);
+
+        if (!number.has_value()) {
+          spdlog::warn("Ignoring entry-point named \"{}\" since it's not an "
+                       "unsigned number!",
+                       name);
+          continue;
+        }
+
         py::object py_callable = entry_point.attr("load")();
 
         if (!py::isinstance<py::function>(py_callable)) {
@@ -69,7 +101,7 @@ load_plugins(const std::string& group_name)
           return output_bytes;
         };
 
-        mapping.emplace(std::move(name), std::move(fn));
+        mapping.emplace(number.value(), std::move(fn));
       }
     }
   } catch (py::error_already_set& e) {

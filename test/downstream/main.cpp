@@ -29,7 +29,8 @@ main(int argc, char** argv)
 
   poc::plugins_mapping_t mapping = poc::load_plugins("example.group");
 
-  poc::plugin_fn_t plugin = mapping.at("hello");
+  // poc::plugin_fn_t plugin = mapping.at("hello");
+  poc::plugin_fn_t plugin = mapping.at(42);
 
   try {
     (void)plugin(input_to_plugin);
