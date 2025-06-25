@@ -1,8 +1,24 @@
-set(POC_VERSION 1.0.0)
+set(POC_VERSION 0.1.0)
+set(PYTHON_PACKAGE_SUBDIRECTORY poc)
 
-find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
+if (DEFINED ENV{VIRTUAL_ENV})
+    # prioritize the python interpreter of the virtual environment, even over conda's
+    # own python interpreter. this is required for integration with tox where cmake
+    # would find all the C++ packages in conda's environment while installing
+    # the python files into tox's virtual environment (found dynamically by cmake).
+    set(Python3_EXECUTABLE "$ENV{VIRTUAL_ENV}/bin/python")
+    find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
+else()
+    find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
+endif()
+
 find_package(pybind11 REQUIRED)
 find_package(spdlog REQUIRED)
+
+message(STATUS "Found Python interpreter: ${Python3_INTERPRETER}")
+message(STATUS "Python version: ${Python3_VERSION}")
+message(STATUS "Python executable path: ${Python3_EXECUTABLE}")
+message(STATUS "Found Python3 site-packages at: ${Python3_SITELIB}")
 
 add_library(Poc poc.cpp)
 add_library(Poc::Poc ALIAS Poc)
@@ -70,10 +86,4 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/PocConfig.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/PocConfigVersion.cmake
         DESTINATION ${INSTALL_CONFIG_DIR})
 
-# Install typing stub into site-packages for future plugins type annotation.
-install(FILES
-            ${CMAKE_CURRENT_SOURCE_DIR}/poc/typing.py
-            ${CMAKE_CURRENT_SOURCE_DIR}/poc/__init__.py
-	    ${CMAKE_CURRENT_SOURCE_DIR}/poc/py.typed
-        DESTINATION ${Python3_SITELIB}/poc/)
-
+add_subdirectory(${PYTHON_PACKAGE_SUBDIRECTORY})
