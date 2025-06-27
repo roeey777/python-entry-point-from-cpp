@@ -8,7 +8,7 @@ import subprocess
 
 from dataclasses import dataclass
 from importlib import metadata
-from typing import Any, Callable
+from typing import Any, Callable, Optional
 
 import pytest
 
@@ -43,15 +43,19 @@ def requires_installed_package(package_name) -> Callable:
 
 
 @pytest.fixture
-def entry_point_output(request, capsys) -> EntryPointOutput:
+def entry_point_output(request, capsys) -> Optional[EntryPointOutput]:
     """
     Capture the output of a given entry point (the arguments are taken from request.param)
     """
     group_name, entry_point_name, data = request.param
     entry_points: metadata.EntryPoints = metadata.entry_points()
     group_entries = entry_points.select(group=group_name)
-    entry_point = [ep.load() for ep in group_entries if ep.name == entry_point_name][0]
+    filtered_entry_points = [ep.load() for ep in group_entries if ep.name == entry_point_name]
 
+    if len(filtered_entry_points) == 0:
+        return None
+
+    entry_point = filtered_entry_points[0]
     result = entry_point(data)
     captured = capsys.readouterr()
 
@@ -135,10 +139,10 @@ def test_list_plugins_find_entry_point(loader):
     assert all((allowed in stdout for allowed in ALLOWLIST))
 
 
+@requires_installed_package("example")
 @pytest.mark.parametrize(
     "entry_point_output", [("example.group", "42", b"asdf")], indirect=True
 )
-@requires_installed_package("example")
 def test_invoke_loaded_entry_point(loader, entry_point_output):
     """
     Test that the library is able to find, load & invoke entry points.
@@ -159,6 +163,8 @@ def test_invoke_loaded_entry_point(loader, entry_point_output):
         2) The output of the loader includes the output of the entry-point.
         3) The output of the loader ends with the result of the entry-point.
     """
+    assert entry_point_output is not None
+
     command: list[str] = shlex.split(
         " ".join(
             [
