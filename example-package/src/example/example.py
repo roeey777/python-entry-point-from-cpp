@@ -4,6 +4,7 @@ An example of a package with a plugin registered via an entry-point.
 
 from poc.typing import Plugin
 
+
 def hello(raw: bytes) -> bytes:
     """
     An example of a plugin, in this example there are some prints and

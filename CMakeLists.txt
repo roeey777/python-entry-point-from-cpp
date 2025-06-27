@@ -28,18 +28,18 @@ set(CPPCHECK_EXCLUDES "--suppress=*:*/CppUTest/*")
 # allow for static analysis options
 include(cmake/StaticAnalyzers.cmake)
 
-message("CPPCHECK_EXCLUDES is:${CPPCHECK_EXCLUDES}")
-message("CMAKE_CXX_CPPCHECK is:${CMAKE_CXX_CPPCHECK}")
+message(STATUS "CPPCHECK_EXCLUDES is:${CPPCHECK_EXCLUDES}")
+message(STATUS "CMAKE_CXX_CPPCHECK is:${CMAKE_CXX_CPPCHECK}")
 
 add_subdirectory(src)
 
 if(ENABLE_TESTING)
     enable_testing()
-    message("Building Tests.")
+    message(STATUS "Building Tests.")
     add_subdirectory(test)
 endif()
 
 if(ENABLE_DOCS)
-    message("Building Docs.")
+    message(STATUS "Building Docs.")
     add_subdirectory(docs)
 endif()

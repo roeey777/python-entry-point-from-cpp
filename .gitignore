@@ -2,6 +2,7 @@ docs/source/conf.py
 docs/build/
 *__pycache__*
 *.egg-info/
+.tox/
 
 .vscode/
 build/
