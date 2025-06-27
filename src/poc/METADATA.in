@@ -1,0 +1,21 @@
+Metadata-Version: 2.1
+Name: @PROJECT_NAME_LOWERCASE@
+Version: @POC_VERSION@
+Summary: A simple Python package
+Author: roeey777
+Author-email: eyalroyee@gmail.com
+License: MIT
+Requires-Python: >=3.8
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Project-URL: Documentation, https://roeey777.github.io/python-entry-point-from-cpp/
+Project-URL: Homepage, https://roeey777.github.io/python-entry-point-from-cpp/
+Project-URL: Source, https://github.com/roeey777/python-entry-point-from-cpp

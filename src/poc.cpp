@@ -45,7 +45,7 @@ load_plugins(const std::string& group_name)
                              "create a py::scoped_interpreter.");
   }
 
-  spdlog::info("loading plugins for group {}", group_name);
+  spdlog::debug("loading plugins for group {}", group_name);
 
   try {
     py::module metadata = py::module::import("importlib.metadata");
@@ -56,17 +56,17 @@ load_plugins(const std::string& group_name)
       entry_points.attr("select")(py::arg("group") = group_name);
 
     if (0 == py::len(group_entries)) {
-      spdlog::warn("Entry-Points group \"{}\" has no entry-points registered!",
-                   group_name);
+      spdlog::debug("Entry-Points group \"{}\" has no entry-points registered!",
+                    group_name);
     } else {
       for (const auto& entry_point : group_entries) {
         std::string name = entry_point.attr("name").cast<std::string>();
         std::optional<std::size_t> number = convert_to_number(name);
 
         if (!number.has_value()) {
-          spdlog::warn("Ignoring entry-point named \"{}\" since it's not an "
-                       "unsigned number!",
-                       name);
+          spdlog::debug("Ignoring entry-point named \"{}\" since it's not an "
+                        "unsigned number!",
+                        name);
           continue;
         }
 

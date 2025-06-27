@@ -24,5 +24,8 @@ dependencies:
   - clang-tools>=20.1.6,<21
   - include-what-you-use>=0.24,<1
   - pybind11>=2.13.6,<3
+  # tox will be used for the automated integration tests of this library.
+  - tox>=4.27.0,<5
+  - cpp-argparse>=3.2,<4
   - pip:
     - -r requirements.txt
