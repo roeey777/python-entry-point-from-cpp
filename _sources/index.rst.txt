@@ -21,6 +21,7 @@ documentation for details.
    entry_point
    proof_of_concept
    demo
+   testing
    generate_docs
    doxygen_index
    tools
