@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mypy &mdash; Proof-of-Concept - Python Entry-Points from C++  documentation</title>
+  <title>ruff &mdash; Proof-of-Concept - Python Entry-Points from C++  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
@@ -15,7 +15,7 @@
       <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/dark.css?v=70edf1c7" />
 
   
-    <link rel="canonical" href="https://roeey777.github.io/python-entry-point-from-cpp/mypy.html" />
+    <link rel="canonical" href="https://roeey777.github.io/python-entry-point-from-cpp/ruff.html" />
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=5929fcd5"></script>
@@ -28,8 +28,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="ruff" href="ruff.html" />
-    <link rel="prev" title="clang-format" href="clang-format.html" /> 
+    <link rel="prev" title="Mypy" href="mypy.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -67,8 +66,8 @@
 <li class="toctree-l2"><a class="reference internal" href="clang-tidy.html">clang-tidy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="iwyu.html">iwyu (Include-What-You-Use)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="clang-format.html">clang-format</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Mypy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ruff.html">ruff</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mypy.html">Mypy</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ruff</a></li>
 </ul>
 </li>
 </ul>
@@ -88,9 +87,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="tools.html">Tools</a></li>
-      <li class="breadcrumb-item active">Mypy</li>
+      <li class="breadcrumb-item active">ruff</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/mypy.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/ruff.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -98,45 +97,30 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="mypy">
-<span id="id1"></span><h1>Mypy<a class="headerlink" href="#mypy" title="Link to this heading"></a></h1>
-<p>Mypy is an optional static type checker for Python that aims to combine the benefits of dynamic (or “duck”) typing and static typing.
-Mypy combines the expressive power and convenience of Python with a powerful type system and compile-time type checking.
-Mypy type checks standard Python programs; run them using any Python VM with basically no runtime overhead.
-tl;dr - <code class="docutils literal notranslate"><span class="pre">mypy</span></code> is static type checker for <code class="docutils literal notranslate"><span class="pre">python</span></code> code which utilizes type annotations.</p>
-<p>It can be used as follows:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mypy<span class="w"> </span>&lt;directory&gt;<span class="w"> </span><span class="o">[</span>&lt;file&gt;<span class="w"> </span><span class="o">[</span>&lt;another<span class="w"> </span>file&gt;<span class="w"> </span><span class="o">[</span>...<span class="o">]]]</span>
+  <section id="ruff">
+<span id="id1"></span><h1>ruff<a class="headerlink" href="#ruff" title="Link to this heading"></a></h1>
+<p>Ruff is an extremely fast Python linter and code formatter, written in Rust.
+Ruff is a drop-in parity with Flake8, isort, and Black.
+Ruff aims to be orders of magnitude faster than alternative tools while integrating more functionality behind a single, common interface.
+Ruff documentation can be found <a class="reference external" href="https://docs.astral.sh/ruff/">here</a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ruff</span></code> can be used as a linter like this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ruff<span class="w"> </span>check<span class="w"> </span>.
 </pre></div>
 </div>
-<p>In this project the <code class="docutils literal notranslate"><span class="pre">example-package</span></code> used during the downstream test is validated by <code class="docutils literal notranslate"><span class="pre">mypy</span></code>
-<strong>and</strong> it’s plugin function annotations are verified due to the last line which is:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">typed_plugin</span><span class="p">:</span> <span class="n">Plugin</span> <span class="o">=</span> <span class="n">hello</span>
+<p>It can also fix automatically some of the errors, like this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ruff<span class="w"> </span>check<span class="w"> </span>.<span class="w"> </span>--fix
 </pre></div>
 </div>
+<p>In order to use <code class="docutils literal notranslate"><span class="pre">ruff</span></code> as a formatter one should run the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ruff<span class="w"> </span>format<span class="w"> </span>.
+</pre></div>
+</div>
+<p>All-‘n’-all <code class="docutils literal notranslate"><span class="pre">ruff</span></code> is super easy to use!</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The type hint <code class="docutils literal notranslate"><span class="pre">Plugin</span></code> is taken from the <code class="docutils literal notranslate"><span class="pre">poc.typing</span></code>.
-<code class="docutils literal notranslate"><span class="pre">poc.typing</span></code> is a typing module installed by <code class="docutils literal notranslate"><span class="pre">poc</span></code> package via <code class="docutils literal notranslate"><span class="pre">cmake</span></code>.
-It can be easily installed by <code class="docutils literal notranslate"><span class="pre">cmake</span></code> like this:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>-B<span class="w"> </span>&lt;build<span class="w"> </span>directory&gt;<span class="w">  </span>-Wdev<span class="w"> </span>-Werror<span class="o">=</span>dev<span class="w"> </span>-DCMAKE_INSTALL_PREFIX<span class="o">=</span><span class="nv">$CONDA_PREFIX</span><span class="w"> </span>-DCMAKE_FIND_ROOT_PATH<span class="o">=</span><span class="nv">$CONDA_PREFIX</span><span class="w"> </span>-DENABLE_TESTING<span class="o">=</span>OFF
-cmake<span class="w"> </span>--build<span class="w"> </span>&lt;build<span class="w"> </span>directory&gt;<span class="w"> </span>--target<span class="w"> </span>install
-</pre></div>
-</div>
-<p>For instance:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>-B<span class="w"> </span>bld<span class="w">  </span>-Wdev<span class="w"> </span>-Werror<span class="o">=</span>dev<span class="w"> </span>-DCMAKE_INSTALL_PREFIX<span class="o">=</span><span class="nv">$CONDA_PREFIX</span><span class="w"> </span>-DCMAKE_FIND_ROOT_PATH<span class="o">=</span><span class="nv">$CONDA_PREFIX</span><span class="w"> </span>-DENABLE_TESTING<span class="o">=</span>OFF
-cmake<span class="w"> </span>--build<span class="w"> </span>bld<span class="w"> </span>--target<span class="w"> </span>install
-</pre></div>
-</div>
-</div>
-<p>The validation of <code class="docutils literal notranslate"><span class="pre">example-package</span></code> is done by invoking <code class="docutils literal notranslate"><span class="pre">mypy</span></code> as follows:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mypy<span class="w"> </span>example-package
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Now <code class="docutils literal notranslate"><span class="pre">mypy</span></code> will run automatically by <code class="docutils literal notranslate"><span class="pre">tox</span></code>.
-It can also be requested to be run like this:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tox<span class="w"> </span>-e<span class="w"> </span>mypy
+<p><code class="docutils literal notranslate"><span class="pre">ruff</span></code> is now used and invoked automatically by <code class="docutils literal notranslate"><span class="pre">tox</span></code>.
+If you want to use <code class="docutils literal notranslate"><span class="pre">ruff</span></code> from <code class="docutils literal notranslate"><span class="pre">tox</span></code> then please use the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tox<span class="w"> </span>-e<span class="w"> </span>ruff
 </pre></div>
 </div>
 </div>
@@ -146,8 +130,7 @@ It can also be requested to be run like this:</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="clang-format.html" class="btn btn-neutral float-left" title="clang-format" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="ruff.html" class="btn btn-neutral float-right" title="ruff" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="mypy.html" class="btn btn-neutral float-left" title="Mypy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
