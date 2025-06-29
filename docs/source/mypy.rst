@@ -21,10 +21,39 @@ In this project the ``example-package`` used during the downstream test is valid
 
    typed_plugin: Plugin = hello
 
-Where the type hint ``Plugin`` is taken from the ``poc.typing`` which is a typing module installed by ``poc`` package via ``cmake``.
+
+.. note::
+
+   The type hint ``Plugin`` is taken from the ``poc.typing``.
+   ``poc.typing`` is a typing module installed by ``poc`` package via ``cmake``.
+   It can be easily installed by ``cmake`` like this:
+
+   .. code-block:: bash
+
+      cmake -S . -B <build directory>  -Wdev -Werror=dev -DCMAKE_INSTALL_PREFIX=$CONDA_PREFIX -DCMAKE_FIND_ROOT_PATH=$CONDA_PREFIX -DENABLE_TESTING=OFF
+      cmake --build <build directory> --target install
+
+   For instance:
+
+   .. code-block:: bash
+
+      cmake -S . -B bld  -Wdev -Werror=dev -DCMAKE_INSTALL_PREFIX=$CONDA_PREFIX -DCMAKE_FIND_ROOT_PATH=$CONDA_PREFIX -DENABLE_TESTING=OFF
+      cmake --build bld --target install
+
+
 The validation of ``example-package`` is done by invoking ``mypy`` as follows:
 
 .. code-block:: bash
 
    mypy example-package
+
+
+.. note::
+
+   Now ``mypy`` will run automatically by ``tox``.
+   It can also be requested to be run like this:
+
+   .. code-block:: bash
+
+      tox -e mypy
 

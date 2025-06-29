@@ -19,6 +19,7 @@ There are multiple tools used by this project, let's try to list them all (and p
 #. ``PlantUML`` - Tool for generating images from UML text.
 #. ``Graphviz`` - Tool for generating images from graphviz text.
 #. :ref:`mypy <mypy>` - a static type checker for ``python`` code.
+#. :ref:`ruff <ruff>` - a linter, formatter & static analyzer for ``python`` code.
 
 .. toctree::
    :maxdepth: 2
@@ -31,4 +32,5 @@ There are multiple tools used by this project, let's try to list them all (and p
    iwyu
    clang-format
    mypy
+   ruff
 

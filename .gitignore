@@ -3,6 +3,8 @@ docs/build/
 *__pycache__*
 *.egg-info/
 .tox/
+.mypy_cache/
+.ruff_cache/
 
 .vscode/
 build/
