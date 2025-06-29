@@ -5,13 +5,14 @@ Implementation of the integration tests for the library.
 import functools
 import shlex
 import subprocess
-
 from dataclasses import dataclass
 from importlib import metadata
+from pathlib import Path
 from typing import Any, Callable, Optional
 
 import pytest
-
+from _pytest.fixtures import SubRequest as RequestFixture
+from pytest import CaptureFixture
 
 LIST_COMMAND_FMT = "list --group-name {group_name}"
 EXEC_COMMAND_FMT = (
@@ -26,14 +27,14 @@ class EntryPointOutput:
     result: bytes
 
 
-def requires_installed_package(package_name) -> Callable:
+def requires_installed_package(package_name: str) -> Callable:
     """
     A decorator for skipping a test if the given package isn't installed.
     """
 
     def decorator(func: Callable) -> Callable:
         @functools.wraps(func)
-        def wrapper(*args, **kwargs) -> Any:
+        def wrapper(*args, **kwargs) -> Any:  # noqa: ANN401
             _ = pytest.importorskip(package_name)
             return func(*args, **kwargs)
 
@@ -43,10 +44,15 @@ def requires_installed_package(package_name) -> Callable:
 
 
 @pytest.fixture
-def entry_point_output(request, capsys) -> Optional[EntryPointOutput]:
+def entry_point_output(
+    request: RequestFixture, capsys: CaptureFixture,
+) -> Optional[EntryPointOutput]:
     """
     Capture the output of a given entry point (the arguments are taken from request.param)
     """
+    group_name: str
+    entry_point_name: str
+    data: str
     group_name, entry_point_name, data = request.param
     entry_points: metadata.EntryPoints = metadata.entry_points()
     group_entries = entry_points.select(group=group_name)
@@ -71,19 +77,21 @@ def entry_point_output(request, capsys) -> Optional[EntryPointOutput]:
             [
                 "--no-interpreter-init",
                 LIST_COMMAND_FMT.format(group_name="unreal.group"),
-            ]
+            ],
         ),
         " ".join(
             [
                 "--no-interpreter-init",
                 EXEC_COMMAND_FMT.format(
-                    group_name="unreal.group", entry_point="42", raw_data="asdf"
+                    group_name="unreal.group",
+                    entry_point="42",
+                    raw_data="asdf",
                 ),
-            ]
+            ],
         ),
     ],
 )
-def test_no_interpreter(loader, cmd):
+def test_no_interpreter(loader: Path, cmd: str) -> None:
     """
     Test that the library can handle a user which have forgotten to
     initialize the embedded python interpreter.
@@ -107,7 +115,7 @@ def test_no_interpreter(loader, cmd):
 
 
 @requires_installed_package("example")
-def test_list_plugins_find_entry_point(loader):
+def test_list_plugins_find_entry_point(loader: Path) -> None:
     """
     Test that the library is able to find & load entry points.
 
@@ -134,22 +142,26 @@ def test_list_plugins_find_entry_point(loader):
     DENYLIST = ("hello",)
 
     command: list[str] = shlex.split(
-        " ".join([str(loader), LIST_COMMAND_FMT.format(group_name="example.group")])
+        " ".join([str(loader), LIST_COMMAND_FMT.format(group_name="example.group")]),
     )
     completed = subprocess.run(command, capture_output=True, check=False)
     stdout = completed.stdout.decode("ascii")
 
     assert completed.returncode == 0
     assert len(completed.stderr) == 0
-    assert all((denied not in stdout for denied in DENYLIST))
-    assert all((allowed in stdout for allowed in ALLOWLIST))
+    assert all(denied not in stdout for denied in DENYLIST)
+    assert all(allowed in stdout for allowed in ALLOWLIST)
 
 
 @requires_installed_package("example")
 @pytest.mark.parametrize(
-    "entry_point_output", [("example.group", "42", b"asdf")], indirect=True
+    "entry_point_output",
+    [("example.group", "42", b"asdf")],
+    indirect=True,
 )
-def test_invoke_loaded_entry_point(loader, entry_point_output):
+def test_invoke_loaded_entry_point(
+    loader: Path, entry_point_output: Optional[EntryPointOutput],
+) -> None:
     """
     Test that the library is able to find, load & invoke entry points.
 
@@ -177,10 +189,12 @@ def test_invoke_loaded_entry_point(loader, entry_point_output):
             [
                 str(loader),
                 EXEC_COMMAND_FMT.format(
-                    group_name="example.group", entry_point="42", raw_data="asdf"
+                    group_name="example.group",
+                    entry_point="42",
+                    raw_data="asdf",
                 ),
-            ]
-        )
+            ],
+        ),
     )
     completed = subprocess.run(command, capture_output=True, check=False)
     stdout = completed.stdout.decode("ascii")
@@ -193,7 +207,7 @@ def test_invoke_loaded_entry_point(loader, entry_point_output):
 
 
 @requires_installed_package("example")
-def test_invoke_malfunctioning_entry_point(loader):
+def test_invoke_malfunctioning_entry_point(loader: Path) -> None:
     """
     Test that the library is able to handle exceptions raised from loaded
     entry-points
@@ -224,10 +238,12 @@ def test_invoke_malfunctioning_entry_point(loader):
             [
                 str(loader),
                 EXEC_COMMAND_FMT.format(
-                    group_name="example.group", entry_point="666", raw_data="asdf"
+                    group_name="example.group",
+                    entry_point="666",
+                    raw_data="asdf",
                 ),
-            ]
-        )
+            ],
+        ),
     )
     completed = subprocess.run(command, capture_output=True, check=False)
     stderr = completed.stderr.decode("ascii")

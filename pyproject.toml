@@ -1,0 +1,49 @@
+# Currently use pyproject.toml for configuring python tools
+# rather than installing a package (since it's installed via cmake).
+
+# External tools
+
+[tool.ruff]
+line-length = 88
+exclude = [
+  "build",
+  "docs",
+]
+
+# Like Black, indent with spaces, rather than tabs.
+format.indent-style = "space"
+# Like Black, use double quotes for strings.
+format.quote-style = "double"
+# Like Black, automatically detect the appropriate line ending.
+format.line-ending = "auto"
+# Like Black, respect magic trailing commas.
+format.skip-magic-trailing-comma = false
+lint.select = [
+  "A",    # use flake8-builtins
+  "ANN",  # use flake8-annotations
+  "B",    # use flake8-bugbear
+  "C",
+  "C4",   # use flake8-comprehensions
+  "COM",  # use flake8-commas
+  "F",    # use pyflakes
+  "FURB", # use refurb
+  "I",    # use isort
+  "PL",   # use pylint
+  "PTH",  # use flake8-use-pathlib
+  "Q",    # use flake8-quotes
+  "RUF",  # use ruff-specific rules
+  "SLF",  # use flake8-self
+  "UP",   # use pyupgrade
+]
+lint.ignore = [
+  "ANN002", # ignore ANN002 - Missing type annotation for *args.
+  "ANN003", # ignore ANN003 - Missing type annotation for **kwargs.
+]
+lint.flake8-builtins.builtins-allowed-modules = [ "random", "types" ]
+
+[tool.mypy]
+exclude = [
+  "^.*build.*\\.py$",
+  "^docs.*\\.py$",
+  "test/downstream/*",
+]
