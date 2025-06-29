@@ -50,7 +50,9 @@ def entry_point_output(request, capsys) -> Optional[EntryPointOutput]:
     group_name, entry_point_name, data = request.param
     entry_points: metadata.EntryPoints = metadata.entry_points()
     group_entries = entry_points.select(group=group_name)
-    filtered_entry_points = [ep.load() for ep in group_entries if ep.name == entry_point_name]
+    filtered_entry_points = [
+        ep.load() for ep in group_entries if ep.name == entry_point_name
+    ]
 
     if len(filtered_entry_points) == 0:
         return None
@@ -112,19 +114,23 @@ def test_list_plugins_find_entry_point(loader):
     :note:
         This test assumes that the example-package is installed in the environment.
         without this package there will be no entry-point to be found in the example.group.
-        It will be assumed that the example-package is installed & it installs 2
+        It will be assumed that the example-package is installed & it installs 3
         entry-points in the example.group and their names are:
         1) hello
         2) 42
+        3) 666
 
     Do:
         1) Run the loader list command on the example.group group.
     Expect:
         1) The loader binary has succeeded (exit code is 0).
-        2) The entry point named 42 is printed.
+        2) The entry points named 42 & 666 are printed.
         3) The entry point named hello isn't printed (didn't passed the filtering)
     """
-    ALLOWLIST = ("42",)
+    ALLOWLIST = (
+        "42",
+        "666",
+    )
     DENYLIST = ("hello",)
 
     command: list[str] = shlex.split(
@@ -150,10 +156,11 @@ def test_invoke_loaded_entry_point(loader, entry_point_output):
     :note:
         This test assumes that the example-package is installed in the environment.
         without this package there will be no entry-point to be found in the example.group.
-        It will be assumed that the example-package is installed & it installs 2
+        It will be assumed that the example-package is installed & it installs 3
         entry-points in the example.group and their names are:
         1) hello
         2) 42
+        3) 666
 
     Do:
         1) Run the loader exec command on the example.group group and entry point named 42
@@ -183,3 +190,49 @@ def test_invoke_loaded_entry_point(loader, entry_point_output):
     assert len(completed.stderr) == 0
     assert entry_point_output.stdout in stdout
     assert entry_point_output.result.decode("ascii") == result
+
+
+@requires_installed_package("example")
+def test_invoke_malfunctioning_entry_point(loader):
+    """
+    Test that the library is able to handle exceptions raised from loaded
+    entry-points
+
+    :note:
+        This test assumes that the example-package is installed in the environment.
+        without this package there will be no entry-point to be found in the example.group.
+        It will be assumed that the example-package is installed & it installs 3
+        entry-points in the example.group and their names are:
+        1) hello
+        2) 42
+        3) 666
+
+    Do:
+        1) Run the loader exec command on the example.group group and entry point named 666
+           with input "asdf".
+    Expect:
+        1) The loader binary has fails (exit code is 1).
+        2) There is no output from the loader (in stdout).
+        3) The output (stderr) of the loader contains an error message regarding
+           a failure in the invoked plugin.
+    """
+    EXPECTED_ERROR_MSG_PREFIX = "Caught an exception from python, which is:"
+    EXPECTED_EXCEPTION = "RuntimeError: Nobody expects the Spanish inquisition!"
+
+    command: list[str] = shlex.split(
+        " ".join(
+            [
+                str(loader),
+                EXEC_COMMAND_FMT.format(
+                    group_name="example.group", entry_point="666", raw_data="asdf"
+                ),
+            ]
+        )
+    )
+    completed = subprocess.run(command, capture_output=True, check=False)
+    stderr = completed.stderr.decode("ascii")
+
+    assert completed.returncode == 1
+    assert len(completed.stdout) == 0
+    assert stderr.startswith(EXPECTED_ERROR_MSG_PREFIX)
+    assert EXPECTED_EXCEPTION in stderr

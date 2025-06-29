@@ -18,4 +18,17 @@ def hello(raw: bytes) -> bytes:
     return raw[::-1]
 
 
+def spanish_inquisition(raw: bytes) -> bytes:
+    """
+    An example of a malfunctioning plugin, in this example an exception will
+    be raised.
+
+    :param raw: the input of the plugin, raw bytes which can be de-serialized.
+    :raises RuntimeError: always raises RuntimeError, for simulation of
+                          a malfunctioning plugin.
+    """
+    raise RuntimeError("Nobody expects the Spanish inquisition!")
+
+
 typed_plugin: Plugin = hello
+typed_malfunctioning_plugin: Plugin = spanish_inquisition
