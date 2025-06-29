@@ -11,6 +11,7 @@ version = "0.1.0"
 [project.entry-points."example.group"]
 hello = "example.example:hello"
 42 = "example.example:hello"
+666 = "example.example:spanish_inquisition"
 
 [tool.setuptools]
 include-package-data = true

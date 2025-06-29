@@ -168,7 +168,7 @@ execute_plugin(const std::string& group_name,
 
     } catch (py::error_already_set& e) {
       /* catch all python's exceptions */
-      std::cout << "Caught an exception from python, which is: " << e.what()
+      std::cerr << "Caught an exception from python, which is: " << e.what()
                 << std::endl;
       PyErr_Clear();
       return 1;
